@@ -2,6 +2,7 @@
 
 ## Структура Task2
 
+```
 Task2/
 ├── deployment.yaml              # Deployment приложения (1 реплика, 30Mi)
 ├── service.yaml                 # Service для доступа к приложению
@@ -12,6 +13,7 @@ Task2/
 ├── prometheus-adapter-values.yaml # Values для Prometheus Adapter
 ├── servicemonitor.yaml          # ServiceMonitor для сбора метрик
 └── README.md                    # Инструкция + скриншоты
+```
 
 # Часть 1. Динамическое масштабирование по памяти
 
