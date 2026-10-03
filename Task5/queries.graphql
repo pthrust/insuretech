@@ -1,0 +1,84 @@
+query GetClientBasics($id: ID!) {
+  client(id: $id) {
+    id
+    name
+    age
+  }
+}
+
+query GetClientDocuments($id: ID!) {
+  documents(clientId: $id) {
+    id
+    type
+    number
+    issueDate
+    expiryDate
+  }
+}
+
+query GetClientRelatives($id: ID!) {
+  relatives(clientId: $id) {
+    id
+    relationType
+    name
+    age
+  }
+}
+
+query GetFullClientCard($id: ID!) {
+  client(id: $id) {
+    id
+    name
+    age
+    documents {
+      edges {
+        node {
+          id
+          type
+          number
+        }
+      }
+      totalCount
+    }
+    relatives {
+      edges {
+        node {
+          id
+          relationType
+          name
+        }
+      }
+      totalCount
+    }
+  }
+}
+
+query GetOsagoDocs($id: ID!) {
+  client(id: $id) {
+    id
+    name
+    documents(type: PASSPORT) {
+      edges { node { number issueDate } }
+    }
+    relatives {
+      edges { node { name age } }
+    }
+  }
+}
+
+query GetProfile($id: ID!) {
+  client(id: $id) {
+    name
+  }
+}
+
+query ListClients($first: Int!, $after: String, $nameContains: String) {
+  clients(first: $first, after: $after, nameContains: $nameContains) {
+    edges {
+      node { id name age }
+      cursor
+    }
+    pageInfo { hasNextPage endCursor }
+    totalCount
+  }
+}

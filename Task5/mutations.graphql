@@ -1,0 +1,20 @@
+mutation UpdateClientName($id: ID!, $input: UpdateClientInput!) {
+  updateClient(id: $id, input: $input) {
+    client { id name age }
+    errors { field message }
+  }
+}
+
+mutation AddClientDocument($input: AddDocumentInput!) {
+  addDocument(input: $input) {
+    document { id type number issueDate expiryDate }
+    errors { field message }
+  }
+}
+
+mutation AddClientRelative($input: AddRelativeInput!) {
+  addRelative(input: $input) {
+    relative { id relationType name age }
+    errors { field message }
+  }
+}
