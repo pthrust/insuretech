@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: insuretech-app
+  labels:
+    app: insuretech-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: insuretech-app
+  template:
+    metadata:
+      labels:
+        app: insuretech-app
+    spec:
+      containers:
+        - name: app
+          image: quay.io/brancz/prometheus-example-app:v0.3.0
+          ports:
+            - containerPort: 8080
+              name: http
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "20Mi"
+            limits:
+              cpu: "200m"
+              memory: "30Mi"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10

@@ -1,0 +1,251 @@
+﻿"""
+GraphQL-схема сервиса управления клиентскими данными (client-info).
+Заменяет REST API v1 и обеспечивает гибкий выбор полей клиентом.
+"""
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+# ============================================================================
+# Типы
+# ============================================================================
+
+"""Клиент сервиса InsureTech."""
+type Client {
+  "Уникальный идентификатор клиента."
+  id: ID!
+
+  "Полное имя клиента."
+  name: String!
+
+  "Возраст клиента в годах."
+  age: Int
+
+  "Документы клиента (паспорт, водительское удостоверение и т.п.)."
+  documents(
+    "Фильтр по типу документа."
+    type: DocumentType
+    "Ограничение количества документов в выборке."
+    first: Int
+    "Курсор для пагинации."
+    after: String
+  ): DocumentConnection!
+
+  "Родственники клиента."
+  relatives(
+    "Фильтр по типу родственной связи."
+    relationType: RelationType
+    "Ограничение количества в выборке."
+    first: Int
+    "Курсор для пагинации."
+    after: String
+  ): RelativeConnection!
+}
+
+"""Документ, удостоверяющий личность или подтверждающий право."""
+type Document {
+  id: ID!
+  type: DocumentType!
+  number: String!
+  "Дата выдачи в формате ISO-8601 (YYYY-MM-DD)."
+  issueDate: String
+  "Дата окончания действия в формате ISO-8601 (YYYY-MM-DD)."
+  expiryDate: String
+}
+
+"""Тип документа."""
+enum DocumentType {
+  PASSPORT
+  DRIVER_LICENSE
+  SNILS
+  INN
+  MEDICAL_POLICY
+  OTHER
+}
+
+"""Родственник клиента."""
+type Relative {
+  id: ID!
+  relationType: RelationType!
+  name: String!
+  age: Int
+}
+
+"""Тип родственной связи."""
+enum RelationType {
+  SPOUSE
+  CHILD
+  PARENT
+  SIBLING
+  OTHER
+}
+
+# ============================================================================
+# Пагинация (Relay-style cursor connections)
+# ============================================================================
+
+type DocumentConnection {
+  edges: [DocumentEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type DocumentEdge {
+  node: Document!
+  cursor: String!
+}
+
+type RelativeConnection {
+  edges: [RelativeEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type RelativeEdge {
+  node: Relative!
+  cursor: String!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+# ============================================================================
+# Payload-типы для мутаций
+# ============================================================================
+
+"""Ошибка уровня поля, возвращаемая вместо исключения."""
+type UserError {
+  field: String
+  message: String!
+}
+
+type UpdateClientPayload {
+  client: Client
+  errors: [UserError!]!
+}
+
+type AddDocumentPayload {
+  document: Document
+  errors: [UserError!]!
+}
+
+type RemoveDocumentPayload {
+  removedId: ID
+  errors: [UserError!]!
+}
+
+type AddRelativePayload {
+  relative: Relative
+  errors: [UserError!]!
+}
+
+type RemoveRelativePayload {
+  removedId: ID
+  errors: [UserError!]!
+}
+
+# ============================================================================
+# Input-типы
+# ============================================================================
+
+input UpdateClientInput {
+  name: String
+  age: Int
+}
+
+input AddDocumentInput {
+  clientId: ID!
+  type: DocumentType!
+  number: String!
+  issueDate: String
+  expiryDate: String
+}
+
+input AddRelativeInput {
+  clientId: ID!
+  relationType: RelationType!
+  name: String!
+  age: Int
+}
+
+# ============================================================================
+# Query
+# ============================================================================
+
+type Query {
+  """
+  Получить клиента по ID.
+  Эквивалент REST: GET /v1/clients/{id}.
+  """
+  client(id: ID!): Client
+
+  """
+  Получить список клиентов с пагинацией.
+  Расширение сверх REST: позволяет строить списочные экраны.
+  """
+  clients(
+    first: Int = 20
+    after: String
+    "Поиск по подстроке в имени."
+    nameContains: String
+  ): ClientConnection!
+
+  """
+  Получить документы клиента отдельным запросом.
+  Эквивалент REST: GET /v1/clients/{id}/documents.
+  Дублирует поле Client.documents — оставлено для совместимости с REST-сценариями.
+  """
+  documents(clientId: ID!, type: DocumentType): [Document!]!
+
+  """
+  Получить родственников клиента отдельным запросом.
+  Эквивалент REST: GET /v1/clients/{id}/relatives.
+  """
+  relatives(clientId: ID!, relationType: RelationType): [Relative!]!
+
+  """Проверка живости сервиса."""
+  health: HealthStatus!
+}
+
+type ClientConnection {
+  edges: [ClientEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type ClientEdge {
+  node: Client!
+  cursor: String!
+}
+
+type HealthStatus {
+  status: String!
+  version: String!
+  timestamp: String!
+}
+
+# ============================================================================
+# Mutation (расширение, т.к. REST контракт read-only)
+# ============================================================================
+
+type Mutation {
+  """Обновить базовую информацию о клиенте."""
+  updateClient(id: ID!, input: UpdateClientInput!): UpdateClientPayload!
+
+  """Добавить документ клиенту."""
+  addDocument(input: AddDocumentInput!): AddDocumentPayload!
+
+  """Удалить документ клиента."""
+  removeDocument(clientId: ID!, documentId: ID!): RemoveDocumentPayload!
+
+  """Добавить родственника клиенту."""
+  addRelative(input: AddRelativeInput!): AddRelativePayload!
+
+  """Удалить родственника клиента."""
+  removeRelative(clientId: ID!, relativeId: ID!): RemoveRelativePayload!
+}

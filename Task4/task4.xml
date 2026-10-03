@@ -1,0 +1,290 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0">
+  <diagram id="51zmUan4mFf6pz3q3UUt" name="InsureTech OSAGO">
+    <mxGraphModel dx="3003" dy="3628" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2600" pageHeight="1600" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <object placeholders="1" c4Name="InsureTech Prod" c4Type="SystemScopeBoundary" c4Application="Event-Driven (Task3 + OSAGO)" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;&lt;div style=&quot;text-align: left&quot;&gt;%c4Name%&lt;/div&gt;&lt;/b&gt;&lt;/font&gt;&lt;div style=&quot;text-align: left&quot;&gt;[%c4Application%]&lt;/div&gt;" id="uZ0quFO-MIEIE11IO5jD-1">
+          <mxCell parent="1" style="rounded=1;fontSize=11;whiteSpace=wrap;html=1;dashed=1;arcSize=3;fillColor=none;strokeColor=#666666;fontColor=#333333;align=left;verticalAlign=bottom;spacing=10;dashPattern=8 4;connectable=0;expand=0;recursiveResize=0;editable=1;pointerEvents=0;" vertex="1">
+            <mxGeometry height="1150" width="1770" x="380" y="130" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Name="Kafka Cluster" c4Type="Container" c4Technology="Apache Kafka / Yandex Data Streams" c4Description="Event Streaming backbone. Retention 7 дней. Партиционирование по application_id" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="kafka-cluster">
+          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#7B1FA2;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#4A148C;verticalAlign=top;spacingTop=10;" vertex="1">
+            <mxGeometry height="900" width="430" x="930" y="330" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Name="topic: product.catalog.updated" c4Type="Topic" c4Technology="Avro" label="&lt;b&gt;%c4Name%&lt;/b&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;[%c4Technology%]&lt;/font&gt;&lt;/div&gt;" id="topic-catalog">
+          <mxCell parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#F3E5F5;fontColor=#333333;strokeColor=#7B1FA2;align=center;" vertex="1">
+            <mxGeometry height="60" width="300" x="990" y="440" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Name="topic: policy.issued" c4Type="Topic" c4Technology="Avro" label="&lt;b&gt;%c4Name%&lt;/b&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;[%c4Technology%]&lt;/font&gt;&lt;/div&gt;" id="topic-policy">
+          <mxCell parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#F3E5F5;fontColor=#333333;strokeColor=#7B1FA2;align=center;" vertex="1">
+            <mxGeometry height="60" width="300" x="990" y="520" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Name="topic: settlement.ready" c4Type="Topic" c4Technology="Avro" label="&lt;b&gt;%c4Name%&lt;/b&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;[%c4Technology%]&lt;/font&gt;&lt;/div&gt;" id="topic-settlement">
+          <mxCell parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#F3E5F5;fontColor=#333333;strokeColor=#7B1FA2;align=center;" vertex="1">
+            <mxGeometry height="60" width="300" x="990" y="600" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Name="topic: osago.application.created" c4Type="Topic" c4Technology="Avro · partitions=24 · key=application_id" c4Description="Новая заявка на ОСАГО от core-app" label="&lt;b&gt;%c4Name%&lt;/b&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;[%c4Technology%]&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="topic-osago-app">
+          <mxCell parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#F3E5F5;fontColor=#333333;strokeColor=#7B1FA2;align=center;" vertex="1">
+            <mxGeometry height="70" width="300" x="990" y="690" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Name="topic: osago.offer.received" c4Type="Topic" c4Technology="Avro · partitions=24 · key=application_id" c4Description="Ответ от одной страховой (приходит по мере поступления)" label="&lt;b&gt;%c4Name%&lt;/b&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;[%c4Technology%]&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="topic-osago-offer">
+          <mxCell parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#F3E5F5;fontColor=#333333;strokeColor=#7B1FA2;align=center;" vertex="1">
+            <mxGeometry height="70" width="300" x="990" y="780" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Name="DLQ" c4Type="Topic" c4Technology="Kafka" label="&lt;b&gt;%c4Name%&lt;/b&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;[%c4Technology%]&lt;/font&gt;&lt;/div&gt;" id="topic-dlq">
+          <mxCell parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#FFCDD2;fontColor=#333333;strokeColor=#B71C1C;align=center;" vertex="1">
+            <mxGeometry height="50" width="300" x="990" y="880" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Name="Schema Registry" c4Type="Container" c4Technology="Confluent / Apicurio" label="&lt;b&gt;%c4Name%&lt;/b&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;[%c4Technology%]&lt;/font&gt;&lt;/div&gt;" id="schema-registry">
+          <mxCell parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#E1BEE7;fontColor=#333333;strokeColor=#7B1FA2;align=center;" vertex="1">
+            <mxGeometry height="50" width="300" x="990" y="950" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Type="InsureTech Web" c4Container="Container" c4Technology="JavaScript, React" c4Description="REST для команд, SSE для стриминга предложений ОСАГО" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Type%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Container%:&amp;nbsp;%c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="web">
+          <mxCell parent="1" style="shape=mxgraph.c4.webBrowserContainer2;whiteSpace=wrap;html=1;boundedLbl=1;rounded=0;strokeColor=#118ACD;fillColor=#23A2D9;strokeColor2=#0E7DAD;fontSize=12;fontColor=#ffffff;align=center;metaEdit=1;resizable=0;" vertex="1">
+            <mxGeometry height="170" width="240" x="490" y="160" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Name="core-app" c4Type="Container" c4Technology="Kotlin, SpringBoot" c4Description="Монолит. Публикует policy.issued, osago.application.created. Потребляет product.catalog.updated, osago.offer.received. Отдаёт SSE для предложений ОСАГО" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="core-app">
+          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#23A2D9;fontColor=#ffffff;align=center;arcSize=5;strokeColor=#0E7DAD;metaEdit=1;resizable=1;connectable=1;" vertex="1">
+            <mxGeometry height="230" width="240" x="490" y="450" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Name="Transactional Outbox" c4Type="Component" c4Technology="PostgreSQL table + Publisher" c4Description="policy.issued, osago.application.created" label="&lt;b&gt;%c4Name%&lt;/b&gt;&lt;div&gt;[%c4Technology%]&lt;/div&gt;" id="core-outbox">
+          <mxCell parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#FFE0B2;fontColor=#333333;strokeColor=#E65100;" vertex="1">
+            <mxGeometry height="40" width="220" x="500" y="620" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Type="core-db" c4Container="Container" c4Technology="PostgreSQL" c4Description="Тарифы (локальная реплика), заявки клиентов, заявки ОСАГО, outbox" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Type%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Container%:&amp;nbsp;%c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="core-db">
+          <mxCell parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;rounded=0;fillColor=#23A2D9;fontSize=12;fontColor=#ffffff;align=center;strokeColor=#0E7DAD;" vertex="1">
+            <mxGeometry height="120" width="240" x="490" y="760" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Type="Relationship" c4Technology="TCP" c4Description="Работа с данными" label="&lt;div style=&quot;text-align:center&quot;&gt;&lt;b&gt;%c4Description%&lt;/b&gt;&lt;div&gt;[%c4Technology%]&lt;/div&gt;&lt;/div&gt;" id="e-core-db">
+          <mxCell edge="1" parent="1" source="core-app" style="endArrow=blockThin;html=1;fontSize=10;strokeWidth=1;endFill=1;strokeColor=#828282;edgeStyle=orthogonalEdgeStyle;endSize=14;startSize=14;rounded=0;" target="core-db">
+            <mxGeometry relative="1" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Type="Relationship" c4Technology="REST" c4Description="POST /osago/applications; GET /osago/applications/{id}" label="&lt;div style=&quot;text-align:center&quot;&gt;&lt;b&gt;%c4Description%&lt;/b&gt;&lt;div&gt;[%c4Technology%]&lt;/div&gt;&lt;/div&gt;" id="e-web-core-rest">
+          <mxCell edge="1" parent="1" source="web" style="endArrow=blockThin;html=1;fontSize=10;strokeWidth=1;endFill=1;strokeColor=#828282;edgeStyle=orthogonalEdgeStyle;endSize=14;startSize=14;rounded=0;" target="core-app">
+            <mxGeometry relative="1" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Type="Relationship" c4Technology="SSE" c4Description="GET /osago/applications/{id}/offers (text/event-stream)" label="&lt;div style=&quot;text-align:center&quot;&gt;&lt;b&gt;%c4Description%&lt;/b&gt;&lt;div&gt;[%c4Technology%]&lt;/div&gt;&lt;/div&gt;" id="e-web-core-sse">
+          <mxCell edge="1" parent="1" source="core-app" style="endArrow=blockThin;html=1;fontSize=10;strokeWidth=2;endFill=1;strokeColor=#00897B;edgeStyle=orthogonalEdgeStyle;endSize=14;startSize=14;rounded=0;dashed=0;" target="web">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points">
+                <mxPoint x="450" y="500" />
+                <mxPoint x="450" y="230" />
+              </Array>
+            </mxGeometry>
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Name="client-info" c4Type="Container" c4Technology="Kotlin, SpringBoot" c4Description="Сервис учёта клиентских данных" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;" id="client-info">
+          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#23A2D9;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0E7DAD;" vertex="1">
+            <mxGeometry height="120" width="240" x="900" y="160" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Type="client-info-db" c4Container="Container" c4Technology="PostgreSQL" c4Description="ФИО, телефон, паспорт" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Type%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Container%:&amp;nbsp;%c4Technology%]&lt;/div&gt;" id="client-info-db">
+          <mxCell parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;rounded=0;fillColor=#23A2D9;fontSize=12;fontColor=#ffffff;align=center;strokeColor=#0E7DAD;" vertex="1">
+            <mxGeometry height="120" width="240" x="1240" y="160" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="e-ci-db" edge="1" parent="1" source="client-info" style="endArrow=blockThin;html=1;fontSize=10;strokeWidth=1;strokeColor=#828282;edgeStyle=orthogonalEdgeStyle;endFill=1;" target="client-info-db" value="TCP">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-core-ci" edge="1" parent="1" style="endArrow=blockThin;html=1;fontSize=10;strokeWidth=1;strokeColor=#828282;edgeStyle=orthogonalEdgeStyle;endFill=1;" target="client-info" value="REST: клиентские данные">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="730" y="220" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <object placeholders="1" c4Name="ins-product-aggregator" c4Type="Container" c4Technology="Kotlin, SpringBoot" c4Description="Интеграция со страховыми по продуктам/тарифам. Публикует product.catalog.updated&#xa;&#xa;&#xa;" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="prod-aggregator">
+          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#23A2D9;fontColor=#ffffff;align=center;arcSize=5;strokeColor=#0E7DAD;" vertex="1">
+            <mxGeometry height="150" width="240" x="1610" y="290" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Name="Outbox" c4Type="Component" c4Technology="PostgreSQL + Publisher" label="&lt;b&gt;%c4Name%&lt;/b&gt;" id="prod-outbox">
+          <mxCell parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#FFE0B2;fontColor=#333333;strokeColor=#E65100;" vertex="1">
+            <mxGeometry height="35" width="220" x="1620" y="400" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="e-prod-pub" edge="1" parent="1" source="prod-outbox" style="endArrow=blockThin;html=1;fontSize=10;strokeWidth=2;strokeColor=#9673a6;edgeStyle=orthogonalEdgeStyle;endFill=1;" target="topic-catalog" value="publish">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1450" y="417.51" />
+              <mxPoint x="1450" y="460.03" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-cat-core" edge="1" parent="1" source="topic-catalog" style="endArrow=blockThin;html=1;fontSize=10;strokeWidth=2;strokeColor=#9673a6;edgeStyle=orthogonalEdgeStyle;endFill=1;" target="core-app" value="consume">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="800" y="480.03" />
+              <mxPoint x="800" y="480.03" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <object placeholders="1" c4Name="ins-comp-settlement" c4Type="Container" c4Technology="Kotlin, SpringBoot" c4Description="Взаиморасчёты. Потребляет product.catalog.updated и policy.issued" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;" id="settlement">
+          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#23A2D9;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0E7DAD;" vertex="1">
+            <mxGeometry height="120" width="240" x="1610" y="470" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Type="settlement-db" c4Container="Container" c4Technology="PostgreSQL" c4Description="Каталог, оформленные полисы, outbox" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Type%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Container%:&amp;nbsp;%c4Technology%]&lt;/div&gt;" id="settle-db">
+          <mxCell parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;rounded=0;fillColor=#23A2D9;fontSize=12;fontColor=#ffffff;align=center;strokeColor=#0E7DAD;" vertex="1">
+            <mxGeometry height="100" width="240" x="1610" y="640" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="e-settle-db" edge="1" parent="1" source="settlement" style="endArrow=blockThin;html=1;fontSize=10;strokeWidth=1;strokeColor=#828282;edgeStyle=orthogonalEdgeStyle;endFill=1;" target="settle-db" value="TCP">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-policy-settle" edge="1" parent="1" source="topic-policy" style="endArrow=blockThin;html=1;fontSize=10;strokeWidth=2;strokeColor=#9673a6;edgeStyle=orthogonalEdgeStyle;endFill=1;" target="settlement" value="consume">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1370" y="540.03" />
+              <mxPoint x="1370" y="540.03" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-cat-settle" edge="1" parent="1" source="topic-catalog" style="endArrow=blockThin;html=1;fontSize=10;strokeWidth=2;strokeColor=#9673a6;edgeStyle=orthogonalEdgeStyle;endFill=1;" target="settlement" value="consume">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1550" y="490.03" />
+              <mxPoint x="1550" y="490.03" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-core-policy" edge="1" parent="1" source="core-outbox" style="endArrow=blockThin;html=1;fontSize=10;strokeWidth=2;strokeColor=#9673a6;edgeStyle=orthogonalEdgeStyle;endFill=1;" target="topic-policy" value="publish">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="890" y="640.03" />
+              <mxPoint x="890" y="550.03" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-core-osago-app" edge="1" parent="1" source="core-outbox" style="endArrow=blockThin;html=1;fontSize=9;strokeWidth=2;strokeColor=#9673a6;edgeStyle=orthogonalEdgeStyle;endFill=1;" target="topic-osago-app" value="publish osago.application.created">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="890" y="640.03" />
+              <mxPoint x="890" y="725" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <object placeholders="1" c4Name="osago-aggregator" c4Type="Container" c4Technology="Kotlin, SpringBoot" c4Description="Отправка заявок ОСАГО в страховые и polling решений. Consumer osago.application.created, producer osago.offer.received. Per-insurer: Timeout 60s, Retry x3, Circuit Breaker, Rate Limit 20 RPS" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="osago-aggregator">
+          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#23A2D9;fontColor=#ffffff;align=center;arcSize=5;strokeColor=#0E7DAD;" vertex="1">
+            <mxGeometry height="230" width="260" x="1510" y="790" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Name="Outbox" c4Type="Component" c4Technology="PostgreSQL + Publisher" c4Description="osago.offer.received" label="&lt;b&gt;%c4Name%&lt;/b&gt;&lt;div&gt;[%c4Technology%]&lt;/div&gt;" id="osago-outbox">
+          <mxCell parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#FFE0B2;fontColor=#333333;strokeColor=#E65100;" vertex="1">
+            <mxGeometry height="40" width="240" x="1520" y="970" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Type="osago-db" c4Container="Container" c4Technology="PostgreSQL" c4Description="osago_application, insurer_request (external_id, attempts, next_poll_at), outbox. SELECT ... FOR UPDATE SKIP LOCKED для распределённого polling" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Type%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Container%:&amp;nbsp;%c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="osago-db">
+          <mxCell parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;rounded=0;fillColor=#23A2D9;fontSize=12;fontColor=#ffffff;align=center;strokeColor=#0E7DAD;" vertex="1">
+            <mxGeometry height="130" width="260" x="1510" y="1080" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="e-osago-db" edge="1" parent="1" source="osago-aggregator" style="endArrow=blockThin;html=1;fontSize=10;strokeWidth=1;strokeColor=#828282;edgeStyle=orthogonalEdgeStyle;endFill=1;" target="osago-db" value="TCP + Outbox">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-osago-consume-app" edge="1" parent="1" source="topic-osago-app" style="endArrow=blockThin;html=1;fontSize=9;strokeWidth=2;strokeColor=#9673a6;edgeStyle=orthogonalEdgeStyle;endFill=1;" target="osago-aggregator" value="consume (key=application_id)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1440" y="725" />
+              <mxPoint x="1440" y="840.03" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-osago-publish-offer" edge="1" parent="1" source="osago-outbox" style="endArrow=blockThin;html=1;fontSize=9;strokeWidth=2;strokeColor=#9673a6;edgeStyle=orthogonalEdgeStyle;endFill=1;" target="topic-osago-offer" value="publish osago.offer.received">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1400" y="990.03" />
+              <mxPoint x="1400" y="830.03" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-osago-consume-offer" edge="1" parent="1" source="topic-osago-offer" style="endArrow=blockThin;html=1;fontSize=9;strokeWidth=2;strokeColor=#9673a6;edgeStyle=orthogonalEdgeStyle;endFill=1;" target="core-app" value="consume → push в SSE">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="850" y="810.03" />
+              <mxPoint x="850" y="660.03" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <object placeholders="1" c4Name="Системы страховых компаний" c4Type="Software System" c4Description="10 страховых. REST API: создать заявку ОСАГО, получить предложение" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#cccccc&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="insurers">
+          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#8C8496;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#736782;" vertex="1">
+            <mxGeometry height="140" width="280" x="2260" y="840" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Type="Relationship" c4Technology="REST" c4Description="POST createApplication + GET getOffer (polling)" label="&lt;div style=&quot;text-align:center&quot;&gt;&lt;b&gt;%c4Description%&lt;/b&gt;&lt;div&gt;[%c4Technology%]&lt;/div&gt;&lt;/div&gt;" id="e-osago-insurers">
+          <mxCell edge="1" parent="1" source="osago-aggregator" style="endArrow=blockThin;html=1;fontSize=10;strokeWidth=1;strokeColor=#828282;edgeStyle=orthogonalEdgeStyle;endFill=1;entryX=0;entryY=0.465;entryDx=0;entryDy=0;entryPerimeter=0;" target="insurers">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points" />
+            </mxGeometry>
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Name="Timeout 60s" c4Type="Resilience" label="&lt;b&gt;⏱ Timeout 60s&lt;/b&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;по ТЗ на ответ страховой&lt;/font&gt;&lt;/div&gt;" id="note-timeout">
+          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;fontColor=#333333;strokeColor=#F57F17;fontSize=11;align=center;" vertex="1">
+            <mxGeometry height="50" width="220" x="1920" y="1030" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Name="Retry x3" c4Type="Resilience" label="&lt;b&gt;🔁 Retry x3&lt;/b&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;exponential backoff 1s/2s/4s&lt;/font&gt;&lt;/div&gt;" id="note-retry">
+          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;fontColor=#333333;strokeColor=#F57F17;fontSize=11;align=center;" vertex="1">
+            <mxGeometry height="50" width="220" x="1920" y="1090" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Name="Circuit Breaker" c4Type="Resilience" label="&lt;b&gt;⚡ Circuit Breaker&lt;/b&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;per-insurer · 50% ошибок / 20 запросов&lt;/font&gt;&lt;/div&gt;" id="note-cb">
+          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;fontColor=#333333;strokeColor=#F57F17;fontSize=11;align=center;" vertex="1">
+            <mxGeometry height="50" width="220" x="1920" y="1150" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Name="Rate Limit outbound" c4Type="Resilience" label="&lt;b&gt;🚦 Rate Limit 20 RPS&lt;/b&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;per-insurer, по договору&lt;/font&gt;&lt;/div&gt;" id="note-rl-out">
+          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;fontColor=#333333;strokeColor=#F57F17;fontSize=11;align=center;" vertex="1">
+            <mxGeometry height="50" width="220" x="1920" y="1210" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Name="Системы партнёров" c4Type="Software System" c4Description="Партнёры, интегрирующие страховые услуги через API" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%]&lt;/div&gt;" id="partners">
+          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#8C8496;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#736782;" vertex="1">
+            <mxGeometry height="120" width="240" x="40" y="570" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="e-partners-core" edge="1" parent="1" source="partners" style="endArrow=blockThin;html=1;fontSize=10;strokeWidth=1;strokeColor=#828282;edgeStyle=orthogonalEdgeStyle;endFill=1;" target="core-app" value="REST: оформление страховок">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="160.06" y="520" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <object placeholders="1" c4Name="Платёжный сервис" c4Type="Software System" c4Description="Внешний платёжный сервис" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%]&lt;/div&gt;" id="payment">
+          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#8C8496;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#736782;" vertex="1">
+            <mxGeometry height="120" width="240" x="40" y="350" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="e-core-pay" edge="1" parent="1" source="core-app" style="endArrow=blockThin;html=1;fontSize=10;strokeWidth=1;strokeColor=#828282;edgeStyle=orthogonalEdgeStyle;endFill=1;" target="payment" value="HTTP: оплата">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="160.06" y="500" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <object placeholders="1" c4Name="Клиент" c4Type="Person" c4Description="Клиент B2C" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%]&lt;/div&gt;" id="client">
+          <mxCell parent="1" style="html=1;fontSize=11;dashed=0;whiteSpace=wrap;fillColor=#083F75;strokeColor=#06315C;fontColor=#ffffff;shape=mxgraph.c4.person2;align=center;" vertex="1">
+            <mxGeometry height="180" width="200" x="510" y="-80" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="e-client-web" edge="1" parent="1" source="client" style="endArrow=blockThin;html=1;fontSize=10;strokeWidth=1;strokeColor=#828282;edgeStyle=orthogonalEdgeStyle;endFill=1;" target="web">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

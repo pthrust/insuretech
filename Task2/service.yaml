@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: insuretech-app
+  labels:
+    app: insuretech-app
+spec:
+  type: ClusterIP
+  selector:
+    app: insuretech-app
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
